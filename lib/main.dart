@@ -28,12 +28,12 @@ class AppWidget extends StatelessWidget {
           return ItemWidget(key: super.key, itemname: "dasdsas");
         },
       ),
+
     );
   }
 }
 
 // class _AppWidgetState
-
 class ItemWidget extends StatelessWidget {
   String itemname = "";
 
@@ -109,3 +109,5 @@ class ItemWidget extends StatelessWidget {
     );
   }
 }
+
+// export
