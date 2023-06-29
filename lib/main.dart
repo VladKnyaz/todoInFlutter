@@ -1,71 +1,111 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(
+    title: "Todo List",
+    home: AppWidget(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class AppWidget extends StatelessWidget {
+  const AppWidget({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter FSDFKHJASDFHJADSHJK',
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: const Color.fromARGB(255, 135, 255, 189)),
-          primaryColor: const Color.fromARGB(255, 67, 156, 129),
-          scaffoldBackgroundColor: const Color.fromARGB(255, 32, 31, 37),
-          useMaterial3: true,
-          textTheme: const TextTheme()),
-      home: const MyHomePage(title: "dsa"),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text("Super todo list"),
+        backgroundColor: const Color.fromRGBO(61, 61, 68, 1),
+        elevation: 0,
+      ),
+      backgroundColor: const Color.fromRGBO(61, 61, 68, 1),
+      body: ListView.builder(
+        itemCount: 6,
+        itemBuilder: (BuildContext context, int index) {
+          return ItemWidget(key: super.key, itemname: "dasdsas");
+        },
+      ),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+// class _AppWidgetState
 
-  final String title;
+class ItemWidget extends StatelessWidget {
+  String itemname = "";
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-    print("dsadsdas");
-  }
+  ItemWidget({super.key, required this.itemname});
 
   @override
   Widget build(BuildContext context) {
-    TextStyle dass() => TextStyle(color: Colors.white, fontSize: 36);
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 68, 207, 131),
-        title: Text(widget.title),
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      height: 60,
+      // decoration: const BoxDecoration(color: Color(0xff6d86dcff)),
+      child: ListTile(
+        tileColor: const Color(0xff6d86dcff),
+        title: const Text("test", style: TextStyle(color: Colors.white)),
+        trailing: Container(
+          width: 60,
+          child: Row(
+            children: [
+              SizedBox(
+                width: 30,
+                height: 35,
+                child: TextButton(
+                    onPressed: () => {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return SimpleDialog(
+                                  title: const Text("Ред.",
+                                      style: TextStyle(color: Colors.lime)),
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.all(26),
+                                      width: 150,
+                                      child: TextField(
+                                          onChanged: (v) => print(v),
+                                          decoration: const InputDecoration(
+                                            labelText: 'Введите текст',
+                                            border: OutlineInputBorder(),
+                                          )),
+                                    ),
+                                    TextButton(
+                                        onPressed: () {
+                                          print("hello");
+                                        },
+                                        child: const Text("Изменить",
+                                            style:
+                                                TextStyle(color: Colors.lime)))
+                                  ],
+                                );
+                              })
+                        },
+                    child: const Icon(
+                      Icons.edit,
+                      size: 16,
+                      color: Colors.white,
+                    )),
+              ),
+              SizedBox(
+                width: 30,
+                height: 35,
+                child: TextButton(
+                    onPressed: () => {print("54qew")},
+                    child: const Icon(
+                      Icons.delete,
+                      size: 16,
+                      color: Colors.white,
+                    )),
+              )
+            ],
+          ),
+        ),
       ),
-      body: Center(
-          child: ListTile(
-        leading: const Text("TEST",
-            style: TextStyle(color: Colors.white, fontSize: 36)),
-        title: const Text("dassda",
-            style: TextStyle(color: Colors.white, fontSize: 36)),
-        subtitle: Text('$_counter',
-            style: const TextStyle(color: Colors.white, fontSize: 16)),
-      )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
