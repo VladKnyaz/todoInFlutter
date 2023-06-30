@@ -38,7 +38,6 @@ class _TodoPageState extends State<TodoPageWidget> {
         itemBuilder: (BuildContext context, int index) {
           return ItemWidget(text: TodoController.getList()[index]['text'], id: index);
         },
-
       ),
 
     );

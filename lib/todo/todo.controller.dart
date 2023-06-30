@@ -5,7 +5,7 @@ import 'package:todoflutter/todo/widgets/item.dart';
 class TodoController {
   TodoController();
   static Function setState = (){};
-  static int _idItemDelete; // id удаляемого предмета
+  static int _idItemDelete =-1; // id удаляемого предмета
   static showDialogEditing(BuildContext context, int id, String text)  {
       return DialogEditing(id:id, text:text);
   }

@@ -17,7 +17,7 @@ class TodoService {
   }
 
   static deleteItem(int id) {
-    if (id == null) return;
+    if (id == -1) return;
     TodoRepository.deleteItem(id);
   }
 }
